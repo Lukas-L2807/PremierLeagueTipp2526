@@ -35,7 +35,7 @@ jobs:
       - name: Run your generator
         # Replace with your real entry point
         run: |
-          python modules/CalcTableExe.py
+          python UpdateTable.py
 
       - name: Commit changes (if any)
         run: |
