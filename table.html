@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>League Overview</title>
+<style>
+    :root {
+      --bg:#0b1020; --card:#121834; --text:#e7eaf6; --muted:#aab0d6;
+      --accent:#5b8cff; --border:#252b52; --table-stripe:#0f1530;
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; padding:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); }
+    .wrap { max-width:1200px; margin:40px auto; padding:0 20px 60px; }
+    h1 { font-size:28px; margin:0 0 20px; }
+    h2 { font-size:22px; margin:30px 0 10px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+    .data-table { width:100%; border-collapse:separate; border-spacing:0; font-size:14px; overflow:hidden; border-radius:12px; border:1px solid var(--border); }
+    .data-table thead th { text-align:left; padding:10px 12px; background:linear-gradient(180deg, #1a2150, #141a3e); position:sticky; top:0; z-index:1; border-bottom:1px solid var(--border); }
+    .data-table tbody td { padding:10px 12px; border-bottom:1px solid var(--border); }
+    .data-table tbody tr:nth-child(odd) { background:var(--table-stripe); }
+    .controls { display:flex; gap:8px; margin:12px 0 20px; flex-wrap:wrap; }
+    .btn { background:transparent; color:var(--text); border:1px solid var(--border); padding:8px 12px; border-radius:10px; cursor:pointer; }
+    .btn:hover { border-color:var(--accent); }
+    .grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; }
+    @media (max-width:900px) { .grid { grid-template-columns:1fr; } }
+    details.player { background:var(--card); border:1px solid var(--border); border-radius:16px; }
+    details.player > summary { list-style:none; cursor:pointer; padding:14px 16px; font-weight:600; display:flex; align-items:center; gap:10px; }
+    details.player > summary::-webkit-details-marker { display:none; }
+    .chev { transition:transform .2s ease; display:inline-block; }
+    details[open] .chev { transform:rotate(90deg); }
+    .player-body { padding:0 16px 16px; }
+    .muted { color:var(--muted); font-size:12px; }
+    .hdr { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:8px; }
+    </style>
+<script>
+    function expandAll() {
+      document.querySelectorAll('details.player').forEach(d => d.open = true);
+    }
+    function collapseAll() {
+      document.querySelectorAll('details.player').forEach(d => d.open = false);
+    }
+    </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hdr">
+      <h1>League Overview</h1>
+      <div class="muted" id="generated">Generated 2025-09-03 23:56</div>
+    </div>
+
+    <div class="card">
+      <h2>Summary</h2>
+      <table class='data-table'><thead><tr><th>position</th><th>name</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr></thead><tbody><tr><td>1</td><td>Lukas</td><td>15</td><td>7</td><td>4</td><td>4</td><td>23</td><td>17</td><td>6</td><td>25</td></tr><tr><td>2</td><td>Mark</td><td>15</td><td>5</td><td>3</td><td>7</td><td>17</td><td>23</td><td>-6</td><td>18</td></tr></tbody></table>
+    </div>
+
+    <div class="controls">
+      <button class="btn" onclick="expandAll()">Expand all players</button>
+      <button class="btn" onclick="collapseAll()">Collapse all players</button>
+    </div>
+
+    <div class="grid">
+      
+    <details class="player">
+      <summary><span class="chev">▶</span> Lukas</summary>
+      <div class="player-body">
+        <table class='data-table'><thead><tr><th>Pos</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr></thead><tbody><tr><td>2</td><td>Chelsea</td><td>3</td><td>2</td><td>1</td><td>0</td><td>7</td><td>1</td><td>6</td><td>7</td></tr><tr><td>6</td><td>Sunderland</td><td>3</td><td>2</td><td>0</td><td>1</td><td>5</td><td>3</td><td>2</td><td>6</td></tr><tr><td>8</td><td>Crystal Palace</td><td>3</td><td>1</td><td>2</td><td>0</td><td>4</td><td>1</td><td>3</td><td>5</td></tr><tr><td>11</td><td>Brighton and Hove Albion</td><td>3</td><td>1</td><td>1</td><td>1</td><td>3</td><td>4</td><td>-1</td><td>4</td></tr><tr><td>16</td><td>West Ham United</td><td>3</td><td>1</td><td>0</td><td>2</td><td>4</td><td>8</td><td>-4</td><td>3</td></tr></tbody></table>
+      </div>
+    </details>
+    
+
+    <details class="player">
+      <summary><span class="chev">▶</span> Mark</summary>
+      <div class="player-body">
+        <table class='data-table'><thead><tr><th>Pos</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr></thead><tbody><tr><td>9</td><td>Manchester United</td><td>3</td><td>1</td><td>1</td><td>1</td><td>4</td><td>4</td><td>0</td><td>4</td></tr><tr><td>10</td><td>Nottingham Forest</td><td>3</td><td>1</td><td>1</td><td>1</td><td>4</td><td>5</td><td>-1</td><td>4</td></tr><tr><td>12</td><td>Leeds United</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>5</td><td>-4</td><td>4</td></tr><tr><td>13</td><td>Manchester City</td><td>3</td><td>1</td><td>0</td><td>2</td><td>5</td><td>4</td><td>1</td><td>3</td></tr><tr><td>15</td><td>Brentford</td><td>3</td><td>1</td><td>0</td><td>2</td><td>3</td><td>5</td><td>-2</td><td>3</td></tr></tbody></table>
+      </div>
+    </details>
+    
+    </div>
+  </div>
+</body>
+</html>

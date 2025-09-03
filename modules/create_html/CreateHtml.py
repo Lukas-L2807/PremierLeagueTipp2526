@@ -1,4 +1,7 @@
 import json
+import os
+import sys
+
 from datetime import datetime
 from pathlib import Path
 from html import escape
@@ -126,8 +129,43 @@ def render_player_block(name, table_html):
     </details>
     """
 
-def make_html_from_json(json_path, title="League Overview"):
-    data = json.loads(Path(json_path).read_text(encoding="utf-8"))
+def order_columns(cols):
+    preferred = ["Pos", "Position", "Team", "Played", "Won", "Drawn", "Lost", "GF", "GA", "GD", "Points"]
+    seen = set()
+    ordered = [c for c in preferred if c in cols and not seen.add(c)]
+    # append any remaining columns in their original order
+    ordered += [c for c in cols if c not in set(ordered)]
+    return ordered
+
+def make_html_from_json():
+    # base directory
+    current_path = os.path.abspath(__file__)
+    while True:
+        if os.path.basename(current_path) == "PremierLeagueTipp2526":
+            base_path = current_path
+            break
+        parent = os.path.dirname(current_path)
+        if parent == current_path:  # reached filesystem root
+            raise FileNotFoundError(f"Project folder '{"PremierLeagueTipp2526"}' not found.")
+        current_path = parent
+    
+    json_dir = os.path.join(base_path, "data")
+
+    if not os.path.exists(json_dir):
+        print(f"Folder {json_dir} does not exist")
+        sys.exit(1)
+
+    # Find all .json files and pick the most recently modified
+    json_files = list(Path(json_dir).glob("*.json"))
+    if not json_files:
+        print(f"No JSON files found in {json_dir}")
+        sys.exit(1)
+
+    latest_json = max(json_files, key=lambda p: p.stat().st_mtime)
+    print(f"Using latest JSON: {latest_json.name}")
+    
+    with open(latest_json, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
     # Expect top-level keys: "summary" and "players"
     # summary can be dict or list-of-rows; players is a list of {name, table} or {name, columns, rows}
@@ -135,21 +173,37 @@ def make_html_from_json(json_path, title="League Overview"):
     summary_html = render_table(summary_cols, summary_rows)
 
     players_html_blocks = []
-    players = data.get("players", [])
-    for p in players:
-        # Accept both schemas:
-        # 1) {"name": "...", "table": {...or list}}
-        # 2) {"name": "...", "columns":[...], "rows":[...]}
-        name = p.get("name", "Player")
-        table_spec = p.get("table", p)  # fallback to the whole object if "table" missing but has columns/rows
-        p_cols, p_rows = infer_table(table_spec)
-        players_html_blocks.append(render_player_block(name, render_table(p_cols, p_rows)))
+    players = data.get("players", {})
 
-    html = build_html(summary_html, "\n".join(players_html_blocks), title=title)
+    if isinstance(players, dict):
+        # Your schema: { "Lukas": [ {...}, {...} ], "Mark": [ {...}, ... ] }
+        for name, table_rows in players.items():
+            p_cols, p_rows = infer_table(table_rows)  # table_rows is a list of dicts
+            p_cols = order_columns(p_cols)
+            players_html_blocks.append(
+                render_player_block(name, render_table(p_cols, p_rows))
+            )
 
-    out_dir = Path("site_output")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now().strftime("%Y-%m-%d")
-    out_file = out_dir / f"tables_{stamp}.html"
-    out_file.write_text(html, encoding="utf-8")
+    elif isinstance(players, list):
+        # Fallback: old schemas where players is a list
+        for p in players:
+            if isinstance(p, dict):
+                name = p.get("name", "Player")
+                table_spec = p.get("table", p)
+                p_cols, p_rows = infer_table(table_spec)
+                p_cols = order_columns(p_cols)
+                players_html_blocks.append(
+                    render_player_block(name, render_table(p_cols, p_rows))
+                )
+            else:
+                # just a string like "Lukas"
+                players_html_blocks.append(
+                    render_player_block(str(p), "<p><em>No table data.</em></p>")
+                )
+
+    html = build_html(summary_html, "\n".join(players_html_blocks), title="League Overview")
+
+    out_file = os.path.join(base_path, f"table.html")
+    with open(out_file, "w", encoding="utf-8") as f:
+        f.write(html)
     return str(out_file)
