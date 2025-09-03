@@ -4,8 +4,9 @@ import pandas as pd
 
 from modules.get_data.ToInt import to_int
 from modules.get_data.take import take
+from modules.get_data.FetchHtml import fetch_rendered_html
 
-def get_premier_league_table(html: str) -> pd.DataFrame:
+def get_premier_league_table(url: str) -> pd.DataFrame:
     """
     Parse the Premier League standings table from HTML that contains:
       <div class="standings__table-container"><table class="standings-table">...</table></div>
@@ -13,9 +14,12 @@ def get_premier_league_table(html: str) -> pd.DataFrame:
     Returns a DataFrame with columns:
     Pos, Team, Played, Won, Drawn, Lost, GF, GA, GD, Points, Next
     """
+    table_selector = "div.standings__table-container table.standings-table"
+    html = fetch_rendered_html(url, table_selector)
+
     soup = BeautifulSoup(html, "lxml")
 
-    table = soup.select_one("div.standings__table-container table.standings-table")
+    table = soup.select_one(table_selector)
     if not table:
         raise ValueError("Could not find standings table with selector "
                          "'div.standings__table-container table.standings-table'.")

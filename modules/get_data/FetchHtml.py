@@ -3,9 +3,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from modules.get_data.getPremierLeagueTable import get_premier_league_table
 
-def fetch_rendered_html_selenium(url: str, table_selector: str) -> str:
+def fetch_rendered_html(url: str, table_selector: str) -> str:
     opts = Options()
     opts.add_argument("--headless=new")
     driver = webdriver.Chrome(options=opts)
