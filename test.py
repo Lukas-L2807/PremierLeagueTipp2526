@@ -1,9 +1,8 @@
-from modules.get_data.getPremierLeagueTable import get_premier_league_table
+from modules.calc_tables.CalcTable import calc_table
 
 def main():
-    html = 'https://www.premierleague.com/tables'
-    table = get_premier_league_table(html)
-    print(table)
+    tables = calc_table()
+    print(tables)
 
 if __name__ == "__main__":
     main()

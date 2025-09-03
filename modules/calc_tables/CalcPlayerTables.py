@@ -3,7 +3,7 @@ from typing import Dict, Tuple, List
 
 def build_player_tables(
     table: pd.DataFrame,
-    players: Dict[str, List[str]],
+    player_teams: Dict[str, List[str]],
     team_col: str = "Team",
 ) -> Tuple[Dict[str, pd.DataFrame], pd.DataFrame]:
     """
@@ -12,8 +12,8 @@ def build_player_tables(
     table : DataFrame
         Master table containing all teams for all players.
         Must include a team identifier column (default: 'Team').
-    players : dict
-        {player_name: [team_name, ...]} from load_players().
+    player_teams : dict
+        {player_name: [team_name, ...]}.
     team_col : str
         Column in df that holds the team names to match against.
 
@@ -34,7 +34,7 @@ def build_player_tables(
     
     # Per-player filter table to their teams
     player_tables: Dict[str, pd.DataFrame] = {}
-    for player, team_names in players.items():
+    for player, team_names in player_teams.items():
         pl = table[table[team_col].isin(team_names)].copy()
         player_tables[player] = pl
 
@@ -46,7 +46,7 @@ def build_player_tables(
     numeric_cols = [c for c in candidate_cols if pd.api.types.is_numeric_dtype(table[c])]
 
     summary_rows = []
-    for player, team_names in players.items():
+    for player, team_names in player_teams.items():
         pl_full = table[table[team_col].isin(team_names)]
         sums = pl_full[numeric_cols].sum(numeric_only=True)
         sums["name"] = player
