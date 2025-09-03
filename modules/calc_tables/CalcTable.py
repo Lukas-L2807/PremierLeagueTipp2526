@@ -16,7 +16,7 @@ def calc_table():
             break
         parent = os.path.dirname(current_path)
         if parent == current_path:  # reached filesystem root
-            raise FileNotFoundError(f"Project folder '{"STRIKE_idea"}' not found.")
+            raise FileNotFoundError(f"Project folder '{"PremierLeagueTipp2526"}' not found.")
         current_path = parent
     
     filepath = os.path.join(base_path, "players", "players.json")
