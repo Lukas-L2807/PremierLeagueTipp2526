@@ -44,7 +44,7 @@ def calc_table():
     }
 
     # create output filepath
-    today_str = date.today().strftime("%Y-%m-%d")   # e.g. "2025-09-03"
+    today_str = date.today().strftime("%Y-%m-%d")
     output_filepath = os.path.join(base_path, "data", f"{today_str}.json")
 
     # Write to json file
