@@ -4,7 +4,7 @@ import pandas as pd
 
 from modules.get_data.ToInt import to_int
 from modules.get_data.take import take
-from modules.get_data.FetchHtml import fetch_rendered_html
+from modules.get_data.FetchHtml import fetch_rendered_html_debug
 
 def get_premier_league_table(url: str) -> pd.DataFrame:
     """
@@ -15,7 +15,7 @@ def get_premier_league_table(url: str) -> pd.DataFrame:
     Pos, Team, Played, Won, Drawn, Lost, GF, GA, GD, Points, Next
     """
     table_selector = "div.standings__table-container table.standings-table"
-    html = fetch_rendered_html(url, table_selector)
+    html = fetch_rendered_html_debug(url, table_selector)
 
     soup = BeautifulSoup(html, "lxml")
 
