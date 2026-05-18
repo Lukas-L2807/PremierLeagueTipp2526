@@ -1,0 +1,154 @@
+{
+  "summary": [
+    {
+      "position": 1,
+      "name": "Mark",
+      "Played": 184,
+      "Won": 78,
+      "Drawn": 53,
+      "Lost": 53,
+      "GF": 291,
+      "GA": 236,
+      "GD": 55,
+      "Points": 287
+    },
+    {
+      "position": 2,
+      "name": "Lukas",
+      "Played": 184,
+      "Won": 60,
+      "Drawn": 54,
+      "Lost": 70,
+      "GF": 230,
+      "GA": 253,
+      "GD": -23,
+      "Points": 234
+    }
+  ],
+  "players": {
+    "Lukas": [
+      {
+        "Pos": 7,
+        "Team": "Brighton and Hove Albion",
+        "Played": 37,
+        "Won": 14,
+        "Drawn": 11,
+        "Lost": 12,
+        "GF": 52,
+        "GA": 43,
+        "GD": 9,
+        "Points": 53
+      },
+      {
+        "Pos": 9,
+        "Team": "Sunderland",
+        "Played": 37,
+        "Won": 13,
+        "Drawn": 12,
+        "Lost": 12,
+        "GF": 40,
+        "GA": 47,
+        "GD": -7,
+        "Points": 51
+      },
+      {
+        "Pos": 10,
+        "Team": "Chelsea",
+        "Played": 36,
+        "Won": 13,
+        "Drawn": 10,
+        "Lost": 13,
+        "GF": 55,
+        "GA": 49,
+        "GD": 6,
+        "Points": 49
+      },
+      {
+        "Pos": 15,
+        "Team": "Crystal Palace",
+        "Played": 37,
+        "Won": 11,
+        "Drawn": 12,
+        "Lost": 14,
+        "GF": 40,
+        "GA": 49,
+        "GD": -9,
+        "Points": 45
+      },
+      {
+        "Pos": 18,
+        "Team": "West Ham United",
+        "Played": 37,
+        "Won": 9,
+        "Drawn": 9,
+        "Lost": 19,
+        "GF": 43,
+        "GA": 65,
+        "GD": -22,
+        "Points": 36
+      }
+    ],
+    "Mark": [
+      {
+        "Pos": 2,
+        "Team": "Manchester City",
+        "Played": 36,
+        "Won": 23,
+        "Drawn": 8,
+        "Lost": 5,
+        "GF": 75,
+        "GA": 32,
+        "GD": 43,
+        "Points": 77
+      },
+      {
+        "Pos": 3,
+        "Team": "Manchester United",
+        "Played": 37,
+        "Won": 19,
+        "Drawn": 11,
+        "Lost": 7,
+        "GF": 66,
+        "GA": 50,
+        "GD": 16,
+        "Points": 68
+      },
+      {
+        "Pos": 8,
+        "Team": "Brentford",
+        "Played": 37,
+        "Won": 14,
+        "Drawn": 10,
+        "Lost": 13,
+        "GF": 54,
+        "GA": 51,
+        "GD": 3,
+        "Points": 52
+      },
+      {
+        "Pos": 14,
+        "Team": "Leeds United",
+        "Played": 37,
+        "Won": 11,
+        "Drawn": 14,
+        "Lost": 12,
+        "GF": 49,
+        "GA": 53,
+        "GD": -4,
+        "Points": 47
+      },
+      {
+        "Pos": 16,
+        "Team": "Nottingham Forest",
+        "Played": 37,
+        "Won": 11,
+        "Drawn": 10,
+        "Lost": 16,
+        "GF": 47,
+        "GA": 50,
+        "GD": -3,
+        "Points": 43
+      }
+    ]
+  }
+}
